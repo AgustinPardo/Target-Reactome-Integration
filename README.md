@@ -6,6 +6,7 @@
 python main -t organism_file -r reactome_file
 ```
 organism_file: File with two colums. First column uniprotID, second column organism id. Separate by "\t".
+
 reactome_file: <https://reactome.org/download/current/UniProt2Reactome_PE_Reactions.txt>
 
 Usefull code to donwload files is in "test-DB-retrieve.sh"
