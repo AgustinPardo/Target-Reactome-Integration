@@ -40,8 +40,8 @@ def parse_arguments():
     """Parsea los argumentos de entrada"""
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-t", dest="target", nargs='+', help="help1")
-    parser.add_argument("-r", dest="react", nargs="?", default="UniProt2Reactome_PE_Reactions.txt", help="help2")
+    parser.add_argument("-t", dest="target", nargs='+', help="Input file of the organism. The file should have two colums, Uniprot id, prot_organismo id")
+    parser.add_argument("-r", dest="react", nargs="?", default="UniProt2Reactome_PE_Reactions.txt", help="Input file of reactome reactions id and uniprotID link")
 
     return parser.parse_args()
 
