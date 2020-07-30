@@ -5,7 +5,7 @@
 ```python
 python main -t organism_file -r reactome_file
 ```
-organism_file: File with two colums. First column uniprotID, second column organism id. Separated by "\t".
+organism_file: File with two columns. First column uniprotID, second column organism id. Separated by "\t".
 
 reactome_file: <https://reactome.org/download/current/UniProt2Reactome_PE_Reactions.txt>
 
