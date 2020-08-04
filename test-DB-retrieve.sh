@@ -1,5 +1,5 @@
 # Download reactome reactions id and uniprotID link Database (UniProt2Reactome_PE_Reactions.txt 161 Mb).
-curl -X GET "https://reactome.org/download/current/UniProt2Reactome_PE_Reactions.txt" -H "accept: text/plain"
+curl -X GET "https://reactome.org/download/current/UniProt2Reactome_PE_Reactions.txt" -H "accept: text/plain" > UniProt2Reactome_PE_Reactions.txt
 
 # Download organism uniprotID proteome.
 url -X GET "https://www.uniprot.org/uniprot/?query=organism:5664&columns=id&format=list&compress=no" -H "accept: text/plain" > lmajor_id.txt
