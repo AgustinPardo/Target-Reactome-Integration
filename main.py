@@ -1,4 +1,6 @@
 import argparse
+import os
+import sys
 
 def target_db_retrieve(input_file):
     """Levanto la data de archivo (Uniprot id, prot_organismo id)"""
@@ -39,16 +41,35 @@ def id_cross(organismo_data, reactome_data):
 def parse_arguments():
     """Parsea los argumentos de entrada"""
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-t", dest="target", nargs='+', help="Input file of the organism. The file should have two colums, Uniprot id, prot_organismo id")
-    parser.add_argument("-r", dest="react", nargs="?", default="UniProt2Reactome_PE_Reactions.txt", help="Input file of reactome reactions id and uniprotID link")
+    parser = argparse.ArgumentParser(description='Uniprot-TargetPathogen crosslink id')
+    parser.add_argument("-f1", '--target_file', default=None, help="Input file of the organism. The file should have two colums: Uniprot id, prot_organismo id")
+    parser.add_argument("-f2", '--reactome_file',  default="UniProt2Reactome_PE_Reactions.txt", help="Input file of reactome reactions id and uniprotID link: https://reactome.org/download/current/UniProt2Reactome_PE_Reactions.txt")
 
-    return parser.parse_args()
-
+    return parser
+    
 def main():
     """Control de argumentos y funciones"""
-    args=parse_arguments()
-    id_cross(target_db_retrieve(args.target[0]), reactome_db_retrieve(args.react))
+    parser=parse_arguments()
+    args=parser.parse_args()
+
+    #Chequeo de Archivos
+    # if args.target_file and args.reactome_file:
+    #     assert os.path.exists(args.target_file), f'{args.target_file} file does not exists'
+    #     assert os.path.exists(args.reactome_file), f'{args.reactome_file} file does not exists'
+    if args.target_file and args.reactome_file:
+        if not(os.path.exists(args.target_file)) and os.path.exists(args.reactome_file):
+            raise FileNotFoundError(f'{args.target_file} file does not exists')
+        if os.path.exists(args.target_file) and not(os.path.exists(args.reactome_file)):
+            raise FileNotFoundError(f'{args.reactome_file} file does not exists')
+        if not(os.path.exists(args.target_file)) and not(os.path.exists(args.reactome_file)):
+            raise FileNotFoundError(f'{args.target_file} and {args.reactome_file} file does not exists')
+    else:
+        sys.stderr.write(
+        f'error: You must specify target_file\n')
+        parser.print_help(sys.stderr)
+        sys.exit(1)
+
+    id_cross(target_db_retrieve(args.target_file), reactome_db_retrieve(args.reactome_file))
     return 0
 
 if __name__=='__main__':
