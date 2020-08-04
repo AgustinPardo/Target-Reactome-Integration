@@ -52,7 +52,7 @@ def main():
     parser=parse_arguments()
     args=parser.parse_args()
 
-    #Chequeo de Archivos
+    #Chequeo: Exitencia de archivos
     # if args.target_file and args.reactome_file:
     #     assert os.path.exists(args.target_file), f'{args.target_file} file does not exists'
     #     assert os.path.exists(args.reactome_file), f'{args.reactome_file} file does not exists'
@@ -63,11 +63,17 @@ def main():
             raise FileNotFoundError(f'{args.reactome_file} file does not exists')
         if not(os.path.exists(args.target_file)) and not(os.path.exists(args.reactome_file)):
             raise FileNotFoundError(f'{args.target_file} and {args.reactome_file} file does not exists')
+        
+        #Chequeo: Archivos con contenido
+        assert os.stat(args.target_file).st_size > 1, f'{args.target_file} is empty'
+        assert os.stat(args.reactome_file).st_size > 1, f'{args.reactome_file} is empty'
     else:
         sys.stderr.write(
         f'error: You must specify target_file\n')
         parser.print_help(sys.stderr)
         sys.exit(1)
+
+
 
     id_cross(target_db_retrieve(args.target_file), reactome_db_retrieve(args.reactome_file))
     return 0
