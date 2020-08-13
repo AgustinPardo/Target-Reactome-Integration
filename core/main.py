@@ -40,10 +40,9 @@ def id_cross(organismo_data, reactome_data):
 
 def parse_arguments():
     """Parsea los argumentos de entrada"""
-
     parser = argparse.ArgumentParser(description='Uniprot-TargetPathogen crosslink id')
     parser.add_argument("-f1", '--target_file', default=None, help="Input file of the organism. The file should have two colums: Uniprot id, prot_organismo id")
-    parser.add_argument("-f2", '--reactome_file',  default="UniProt2Reactome_PE_Reactions.txt", help="Input file of reactome reactions id and uniprotID link: https://reactome.org/download/current/UniProt2Reactome_PE_Reactions.txt")
+    parser.add_argument("-f2", '--reactome_file', default="UniProt2Reactome_PE_Reactions.txt", help="Input file of reactome reactions id and uniprotID link: https://reactome.org/download/current/UniProt2Reactome_PE_Reactions.txt")
 
     return parser
     
@@ -73,9 +72,8 @@ def main():
         parser.print_help(sys.stderr)
         sys.exit(1)
 
-
-
     id_cross(target_db_retrieve(args.target_file), reactome_db_retrieve(args.reactome_file))
+    
     return 0
 
 if __name__=='__main__':
