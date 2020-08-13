@@ -1,2 +1,2 @@
 # Download reactome reactions id and uniprotID link Database (UniProt2Reactome_PE_Reactions.txt 161 Mb).
-https://reactome.org/download/current/UniProt2Reactome_PE_Reactions.txt" -H "accept: text/plain
+https://reactome.org/download/current/UniProt2Reactome_PE_Reactions.txt
